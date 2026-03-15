@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logs Viewer</title>
+  <style>
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .log-box {
+      background: #111827;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 15px;
+      min-height: 400px;
+      white-space: pre-wrap;
+      line-height: 1.8;
+      font-size: 14px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>📋 Live Logs</h1>
+  <div class="log-box" id="logs">جاري التحميل...</div>
+
+  <script>
+    async function loadLogs() {
+      try {
+        const res = await fetch("/logs");
+        const data = await res.json();
+
+        document.getElementById("logs").textContent =
+          data.logs && data.logs.length
+            ? data.logs.join("\n")
+            : "لا يوجد لوقز حتى الآن";
+      } catch (err) {
+        document.getElementById("logs").textContent = "فشل تحميل اللوقز";
+      }
+    }
+
+    loadLogs();
+    setInterval(loadLogs, 3000);
+  </script>
+</body>
+</html>
