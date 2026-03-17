@@ -37,4 +37,4 @@ config.json
 data/
 credentials.json
 *.db
-trades.csv
+trades.csv".env" 
