@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 async function connectDB() {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
-      dbName: "ai-trading"
+      dbName: "ai-trading-v2"
     });
 
     console.log("✅ MongoDB connected");
