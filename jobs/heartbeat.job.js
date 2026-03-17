@@ -7,7 +7,7 @@ function startHeartbeat() {
   sendHeartbeat();
 
   // ثم كل ساعة
-  setInterval(sendHeartbeat, HEARTBEAT_INTERVAL_MS);
+  // setInterval(sendHeartbeat, HEARTBEAT_INTERVAL_MS);
 }
 
 async function sendHeartbeat() {
