@@ -103,12 +103,15 @@ function buildSignalMessage(signal) {
   const tp3   = signal.tp3Hit         ? "✅" : "⏳";
   const sl    = signal.stopLossHit    ? "❌" : "⏳";
 
+  const directionEmoji = signal.direction === "LONG" ? "🟢" : "🔴";
+  
   return `
-🚨 <b> 🟢 v2FUTURES SIGNAL</b>
+🚨 <b>  v2 FUTURES SIGNAL</b>
+
 📌 <b>Status:</b> ${statusText}
 
 🪙 <b>Coin:</b> ${escapeHtml(signal.symbol)}
-📈 <b>Direction:</b> ${escapeHtml(signal.direction)}
+📈 <b>Direction:</b> ${escapeHtml(signal.direction)} ${directionEmoji}
 🕒 <b>Created:</b> ${formatDateTime(signal.createdAt)}
 
 💰 <b>Entry Zone:</b> <b>${escapeHtml(signal.entryMin)} — ${escapeHtml(signal.entryMax)}</b>
@@ -120,7 +123,6 @@ ${formatTarget("TP1", signal.targets?.[0], signal.tp1Hit, signal.tp1HitAt)}
 ${formatTarget("TP2", signal.targets?.[1], signal.tp2Hit, signal.tp2HitAt)}
 ${formatTarget("TP3", signal.targets?.[2], signal.tp3Hit, signal.tp3HitAt)}
 
-📍 ENTRY ${entry} | TP1 ${tp1} | TP2 ${tp2} | TP3 ${tp3} | SL ${sl}
 
 📊 <b>Confidence:</b> ${escapeHtml(signal.confidence)}%
 🏆 <b>Score:</b> ${escapeHtml(signal.score ?? "N/A")}
@@ -132,16 +134,18 @@ ${formatTarget("TP3", signal.targets?.[2], signal.tp3Hit, signal.tp3HitAt)}
 • <b>TP2:</b>  ${formatPct(tp2Pct)}
 • <b>TP3:</b>  ${formatPct(tp3Pct)}
 
-🧠 <b>Analysis:</b>
-${escapeHtml(signal.summary)}
-
-🕒 <b>Entry Hit:</b> ${formatDateTime(signal.entryHitAt)}
-🕒 <b>TP1 Hit:</b>   ${formatDateTime(signal.tp1HitAt)}
-🕒 <b>TP2 Hit:</b>   ${formatDateTime(signal.tp2HitAt)}
-🕒 <b>TP3 Hit:</b>   ${formatDateTime(signal.tp3HitAt)}
-🕒 <b>SL Hit:</b>    ${formatDateTime(signal.stopLossHitAt)}
 `.trim();
 }
+
+// 📍 ENTRY ${entry} | TP1 ${tp1} | TP2 ${tp2} | TP3 ${tp3} | SL ${sl}
+
+// 🧠 <b>Analysis:</b>
+// ${escapeHtml(signal.summary)}
+// 🕒 <b>Entry Hit:</b> ${formatDateTime(signal.entryHitAt)}
+// 🕒 <b>TP1 Hit:</b>   ${formatDateTime(signal.tp1HitAt)}
+// 🕒 <b>TP2 Hit:</b>   ${formatDateTime(signal.tp2HitAt)}
+// 🕒 <b>TP3 Hit:</b>   ${formatDateTime(signal.tp3HitAt)}
+// 🕒 <b>SL Hit:</b>    ${formatDateTime(signal.stopLossHitAt)}
 
 // ─────────────────────────────────────────────
 //  إرسال وتحديث الرسائل
